@@ -1,10 +1,10 @@
 import { useState } from "react";
-import userConversation from "../zustand/useConversation";
+import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
-  const { messages, setMessage, selectedConversation } = userConversation();
+  const { messages, setMessages, selectedConversation } = useConversation();
 
   const sendMessage = async (message) => {
     setLoading(true);
@@ -25,7 +25,7 @@ const useSendMessage = () => {
         throw new Error(data.error);
       }
 
-      setMessage([...messages, data]);
+      setMessages([...messages, data]);
     } catch (error) {
       toast.error(error.message);
     } finally {
